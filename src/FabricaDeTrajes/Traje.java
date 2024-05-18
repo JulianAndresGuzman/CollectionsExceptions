@@ -1,5 +1,8 @@
 package FabricaDeTrajes;
-
+/**
+ *
+ * @author JulianAndresGuzmanCuellar 20232215518
+ */
 import java.util.ArrayList;
 
 public class Traje {
