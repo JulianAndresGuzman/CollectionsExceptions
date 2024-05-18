@@ -1,12 +1,15 @@
 
 package FabricaDeTrajes;
+import java.util.List;
 
 public interface iFabricaDeTrajes {
     
-  void añadirComponenteAlmacen();
+  void añadirComponenteAlmacen() throws IdException, MuchoExtracomunitarioException, MangaException;
   void ListarComponentes();
-  void añadirTrajeAlmacen();
+  void añadirTrajeAlmacen() throws ColoresException, TallaException, TrajeYaExisteException;
   void ListarTrajes();
   void activarDesactivarRebajas();
   void crearEnvío();
+
+    
 }
