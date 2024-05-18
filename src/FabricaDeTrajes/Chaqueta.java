@@ -19,7 +19,7 @@ public class Chaqueta {
     }
     
     public String toString(){
-        return "Numero de botones : " numBotones;
+        return "Numero de botones : " +numBotones;
         
     }
 }
