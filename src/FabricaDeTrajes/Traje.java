@@ -28,5 +28,8 @@ public class Traje {
         this.nombre = nombre;
     }
     
-    
+    @Override
+    public String toString(){
+        return "piezas: " + piezas + "nombre: " + nombre;
+    }
 }

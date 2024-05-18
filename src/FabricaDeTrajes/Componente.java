@@ -84,5 +84,4 @@ public class Componente {
         return Integer.compare(this.id, otro.id);
     }
     
-    
 }
