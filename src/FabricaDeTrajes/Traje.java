@@ -1,4 +1,5 @@
 package FabricaDeTrajes;
+
 /**
  *
  * @author JulianAndresGuzmanCuellar 20232215518
@@ -7,8 +8,8 @@ import java.util.ArrayList;
 
 public class Traje {
 
-    ArrayList<Componente> piezas;
-    String nombre;
+    private ArrayList<Componente> piezas;
+    private String nombre;
 
     public Traje(ArrayList<Componente> piezas, String nombre) {
         this.piezas = piezas;
@@ -30,9 +31,9 @@ public class Traje {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return "piezas: " + piezas + "nombre: " + nombre;
     }
 }
