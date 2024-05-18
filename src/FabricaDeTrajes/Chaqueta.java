@@ -18,6 +18,7 @@ public class Chaqueta {
         this.numBotones = numBotones;
     }
     
+    @Override
     public String toString(){
         return "Numero de botones : " +numBotones;
         
