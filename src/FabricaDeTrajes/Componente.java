@@ -79,6 +79,10 @@ public class Componente {
             return false;
         }
     }
+
+    public int compareTo(Componente otro) {
+        return Integer.compare(this.id, otro.id);
+    }
     
     
 }
