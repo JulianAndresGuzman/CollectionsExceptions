@@ -16,6 +16,7 @@ public class Traje {
         this.nombre = nombre;
     }
 
+    
     public ArrayList<Componente> getPiezas() {
         return piezas;
     }
@@ -36,4 +37,5 @@ public class Traje {
     public String toString() {
         return "piezas: " + piezas + "nombre: " + nombre;
     }
+
 }
