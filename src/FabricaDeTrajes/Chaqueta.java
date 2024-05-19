@@ -3,11 +3,13 @@ package FabricaDeTrajes;
  *
  * @author JulianAndresGuzmanCuellar 20232215518
  */
-public class Chaqueta {
-    private int numBotones;
+public class Chaqueta extends Componente{
+        private int numBotones;
 
-    public Chaqueta(int numBotones) {
-        this.numBotones = numBotones;
+        public Chaqueta(int id, String nombre, String talla, String color, boolean escomunitario, double precio) {
+        super(id, nombre, talla, color, escomunitario, precio);
+        setPrecio(precio + 2 * numBotones); // Ajuste de precio según el número de botones
+
     }
 
     public int getNumBotones() {

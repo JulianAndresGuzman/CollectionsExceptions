@@ -4,8 +4,12 @@ package FabricaDeTrajes;
  *
  * @author ASUS
  */
-public class Blusa {
+public class Blusa extends Componente{
     private boolean mangaLarga;
+
+    public Blusa(int id, String nombre, String talla, String color, boolean escomunitario, double precio) {
+        super(id, nombre, talla, color, escomunitario, precio);
+    }
 
     public boolean isMangaLarga() {
         return mangaLarga;

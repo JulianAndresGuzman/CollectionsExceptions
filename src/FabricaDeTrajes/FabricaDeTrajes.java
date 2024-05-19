@@ -45,7 +45,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
                 return;
             }
         }
-        
+
         System.out.print("Ingrese nombre del componente: ");
         String nombre = in.nextLine();
 
@@ -60,12 +60,32 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
         System.out.print("Ingrese precio del componente: ");
         double precio = in.nextDouble();
-        
-        Componente nuevoComponente = new Componente(id, nombre, talla, color, escomunitario, precio);
 
+        Componente nuevoComponente = new Componente(id, nombre, talla, color, escomunitario, precio);
+        
+        if (escomunitario) {
+            long countExtracomunitarios = componentesEnAlmacen.stream().filter(Componente::isEscomunitario).count();
+            if (countExtracomunitarios > componentesEnAlmacen.size() / 2) {
+                System.out.println("No se puede añadir más del 50% de componentes extracomunitarios.");
+                return;
+            }
+        }
+        // Verificar condiciones especiales para Blusa y Chaqueta
+        if (nuevoComponente instanceof Blusa) {
+            Blusa blusa = (Blusa) nuevoComponente;
+            boolean existeMangaCorta = componentesEnAlmacen.stream().anyMatch(c -> c instanceof Blusa && !((Blusa) c).isMangaLarga() && c.getColor().equals(blusa.getColor()));
+            boolean existeMangaLarga = componentesEnAlmacen.stream().anyMatch(c -> c instanceof Blusa && ((Blusa) c).isMangaLarga() && c.getColor().equals(blusa.getColor()));
+
+            if (blusa.isMangaLarga() && !existeMangaCorta || !blusa.isMangaLarga() && !existeMangaLarga) {
+                System.out.println("No se puede añadir la blusa. Debe existir una blusa de manga corta o larga del mismo color.");
+                return;
+            }
+        }
+
+        componentesEnAlmacen.add(nuevoComponente);
+        System.out.println("Componente añadido con éxito.");
     }
-    
-    
+
     @Override
     public void ListarComponentes() {
         for (Componente componente : componentesEnAlmacen) {
@@ -75,7 +95,45 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
     @Override
     public void añadirTrajeAlmacen() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+               Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Blusas disponibles:");
+        componentesEnAlmacen.stream().filter(c -> c instanceof Blusa).forEach(System.out::println);
+
+        System.out.print("Ingrese ID de la blusa: ");
+        int blusaId = scanner.nextInt();
+        Componente blusa = componentesEnAlmacen.stream().filter(c -> c.getId() == blusaId && c instanceof Blusa).findFirst().orElse(null);
+
+        if (blusa == null) {
+            System.out.println("Blusa no encontrada.");
+            return;
+        }
+
+        System.out.println("Chaquetas disponibles:");
+        componentesEnAlmacen.stream().filter(c -> c instanceof Chaqueta).forEach(System.out::println);
+
+        System.out.print("Ingrese ID de la chaqueta: ");
+        int chaquetaId = scanner.nextInt();
+        Componente chaqueta = componentesEnAlmacen.stream().filter(c -> c.getId() == chaquetaId && c instanceof Chaqueta).findFirst().orElse(null);
+
+        if (chaqueta == null) {
+            System.out.println("Chaqueta no encontrada.");
+            return;
+        }
+
+        System.out.print("Ingrese el nombre del traje: ");
+        scanner.nextLine(); // Consumir newline
+        String nombreTraje = scanner.nextLine();
+
+        for (Traje traje : trajesEnAlmacen) {
+            if (traje.getNombre().equals(nombreTraje)) {
+                System.out.println("Ya existe un traje con ese nombre.");
+                return;
+            }
+        }
+
+ 
+        System.out.println("Traje añadido con éxito.");
     }
 
     @Override
@@ -87,20 +145,6 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
     @Override
     public void activarDesactivarRebajas() {
-        sonRebajas = !sonRebajas;
-        if (sonRebajas) {
-            for (Componente componente : componentesEnAlmacen) {
-                componente.setPrecio(componente.getPrecio() * 0.9); // Aplicar 10% de descuento
-            }
-            for (Traje traje : trajesEnAlmacen) {
-                // Aplicar descuento en los componentes del traje
-                traje.getChaqueta().setPrecio(traje.getChaqueta().getPrecio() * 0.9);
-                traje.getBlusa().setPrecio(traje.getBlusa().getPrecio() * 0.9);
-                traje.getParteInferior().setPrecio(traje.getParteInferior().getPrecio() * 0.9);
-            }
-        } else {
-            // Restaurar precios originales si es necesario
-        }
     }
 
     @Override
