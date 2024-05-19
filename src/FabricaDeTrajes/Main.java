@@ -20,13 +20,13 @@ public class Main {
                         fabrica.añadirComponenteAlmacen();
                         break;
                     case 2:
-                        fabrica.listarComponentes();
+                        fabrica.ListarComponentes();
                         break;
                     case 3:
                         fabrica.añadirTrajeAlmacen();
                         break;
                     case 4:
-                        fabrica.listarTrajes();
+                        fabrica.ListarTrajes();
                         break;
                     case 5:
                         fabrica.activarDesactivarRebajas();

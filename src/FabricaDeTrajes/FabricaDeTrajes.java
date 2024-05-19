@@ -17,7 +17,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
         this.sonRebajas = false;
     }
 
-     void EscribirMenu() {
+    void EscribirMenu() {
 
         System.out.println("***************************************");
         System.out.println("MENU FABRICA DE TRAJES");
@@ -62,7 +62,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
         double precio = in.nextDouble();
 
         Componente nuevoComponente = new Componente(id, nombre, talla, color, escomunitario, precio);
-        
+
         if (escomunitario) {
             long countExtracomunitarios = componentesEnAlmacen.stream().filter(Componente::isEscomunitario).count();
             if (countExtracomunitarios > componentesEnAlmacen.size() / 2) {
@@ -94,8 +94,10 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
     @Override
     public void añadirTrajeAlmacen() {
-               Scanner scanner = new Scanner(System.in);
 
+        Scanner in = new Scanner(System.in);
+
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Blusas disponibles:");
         componentesEnAlmacen.stream().filter(c -> c instanceof Blusa).forEach(System.out::println);
 
@@ -131,14 +133,15 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
             }
         }
 
- 
         System.out.println("Traje añadido con éxito.");
+
     }
 
     public void ListarTrajes() {
         for (Traje traje : trajesEnAlmacen) {
             System.out.println(traje);
         }
+
     }
 
     @Override
@@ -149,17 +152,5 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
     public void crearEnvío() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    @Override
-    public void listarComponentes() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void listarTrajes() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
 
 }

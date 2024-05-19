@@ -71,9 +71,9 @@ public class Componente {
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre + "id: " + id + " talla: " + 
-                talla + " color : " + color + " es comunitario: " + 
-                escomunitario + "precio : " + precio;
+        return " Nombre:" + nombre + "         id:" + id + "        talla:" + 
+                talla + "           color:" + color + "         es comunitario:" + 
+                escomunitario + "        precio:" + precio;
     }
 
     @Override

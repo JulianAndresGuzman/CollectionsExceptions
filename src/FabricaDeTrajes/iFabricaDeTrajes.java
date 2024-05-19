@@ -11,11 +11,11 @@ import java.util.Scanner;
 
     void añadirComponenteAlmacen() throws IdException, MuchoExtracomunitarioException, MangaException;
 
-    void listarComponentes();
+    void ListarComponentes();
 
     void añadirTrajeAlmacen() throws ColoresException, TallaException, TrajeYaExisteException;
 
-    void listarTrajes();
+    void ListarTrajes();
 
     void activarDesactivarRebajas();
 
@@ -57,7 +57,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
     }
 
     @Override
-    public void listarComponentes() {
+    public void ListarComponentes() {
         for (Componente componente : componentesEnAlmacen) {
             System.out.println(componente);
         }
@@ -69,7 +69,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
     }
 
     @Override
-    public void listarTrajes() {
+    public void ListarTrajes() {
         for (Traje traje : trajesEnAlmacen) {
             System.out.println(traje);
         }
