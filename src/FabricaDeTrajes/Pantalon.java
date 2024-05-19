@@ -5,9 +5,13 @@ package FabricaDeTrajes;
  *
  * @author Jerson Reyes
  */
-public class Pantalon {
+public class Pantalon extends Componente {
    
     private boolean conCremallera;
+
+    public Pantalon(int id, String nombre, String talla, String color, boolean escomunitario, double precio) {
+        super(id, nombre, talla, color, escomunitario, precio);
+    }
 
     public boolean isConCremallera() {
         return conCremallera;

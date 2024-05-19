@@ -86,7 +86,6 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
         System.out.println("Componente añadido con éxito.");
     }
 
-    @Override
     public void ListarComponentes() {
         for (Componente componente : componentesEnAlmacen) {
             System.out.println(componente);
@@ -136,7 +135,6 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
         System.out.println("Traje añadido con éxito.");
     }
 
-    @Override
     public void ListarTrajes() {
         for (Traje traje : trajesEnAlmacen) {
             System.out.println(traje);
@@ -149,6 +147,16 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
     @Override
     public void crearEnvío() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void listarComponentes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void listarTrajes() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

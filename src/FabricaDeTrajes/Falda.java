@@ -3,12 +3,12 @@ package FabricaDeTrajes;
  *
  * @author JulianAndresGuzmanCuellar 20232215518
  */
-public class Falda {
+public class Falda extends Componente {
 
     private boolean conCremallera;
 
-    public Falda(boolean conCremallera) {
-        this.conCremallera = conCremallera;
+    public Falda(int id, String nombre, String talla, String color, boolean escomunitario, double precio) {
+        super(id, nombre, talla, color, escomunitario, precio);
     }
 
     public boolean isConCremallera() {
