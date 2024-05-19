@@ -17,7 +17,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
         this.sonRebajas = false;
     }
 
-    public void EscribirMenu() {
+     void EscribirMenu() {
 
         System.out.println("***************************************");
         System.out.println("MENU FABRICA DE TRAJES");
@@ -159,5 +159,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
     public void listarTrajes() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+
 
 }
