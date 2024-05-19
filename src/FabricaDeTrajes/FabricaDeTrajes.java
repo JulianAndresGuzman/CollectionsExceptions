@@ -4,7 +4,7 @@ package FabricaDeTrajes;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-public abstract class FabricaDeTrajes implements iFabricaDeTrajes {
+ class FabricaDeTrajes implements iFabricaDeTrajes {
     
     private ArrayList<Componente> componentesEnAlmacen;
     private TreeSet<Traje> trajesEnAlmacen;
@@ -14,6 +14,40 @@ public abstract class FabricaDeTrajes implements iFabricaDeTrajes {
         this.componentesEnAlmacen = new ArrayList<>();
         this.trajesEnAlmacen = new TreeSet<>();
         this.sonRebajas = false;
+    }
+    
+    public void EscribirMenu(){
+        
+    }
+
+    @Override
+    public void añadirComponenteAlmacen() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void ListarComponentes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void añadirTrajeAlmacen() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void ListarTrajes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void activarDesactivarRebajas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void crearEnvío() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
   
 }

@@ -1,6 +1,5 @@
 
 package FabricaDeTrajes;
-
 /**
  *
  * @author ASUS
