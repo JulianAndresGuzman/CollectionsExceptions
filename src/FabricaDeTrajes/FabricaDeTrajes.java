@@ -27,7 +27,6 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
         System.out.println("4.- Listar trajes del almacén");
         System.out.println("5.- Activar/Desactivar las rebajas");
         System.out.println("6.- Crear envío");
-        System.out.println("7.- Crea componentes de prueba");
         System.out.println("0.- Salir");
         System.out.println("****************************************");
 
