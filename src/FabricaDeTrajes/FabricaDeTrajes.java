@@ -95,6 +95,29 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
     public void añadirTrajeAlmacen() {
 
         Scanner in = new Scanner(System.in);
+        int option;
+        System.out.println("CREA EL TIPO DE TRAJE QUE DESEAS");
+        System.out.println("1.- Blusa");
+        System.out.println("2.- Chaqueta");
+        System.out.println("3.- Falda");
+        System.out.println("4.- Pantalón");
+        option = in.nextInt();
+
+        switch (option) {
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                break;
+
+        }
+        /*Scanner in = new Scanner(System.in);
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Blusas disponibles:");
@@ -130,8 +153,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
                 System.out.println("Ya existe un traje con ese nombre.");
                 return;
             }
-        }
-
+        }*/
         System.out.println("Traje añadido con éxito.");
 
     }
