@@ -105,6 +105,65 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
     @Override
     public void añadirTrajeAlmacen() {
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Blusas disponibles:");
+        componentesEnAlmacen.stream().filter(c -> c instanceof Blusa).forEach(System.out::println);
+        System.out.print("Ingrese ID de la blusa: ");
+        int blusaId = in.nextInt();
+        Componente blusa = componentesEnAlmacen.stream().filter(c -> c.getId() == blusaId && c instanceof Blusa).findFirst().orElse(null);
+
+        if (blusa == null) {
+            System.out.println("Blusa no encontrada.");
+            return;
+        }
+
+        System.out.println("Chaquetas disponibles:");
+        componentesEnAlmacen.stream().filter(c -> c instanceof Chaqueta).forEach(System.out::println);
+        System.out.print("Ingrese ID de la chaqueta: ");
+        int chaquetaId = in.nextInt();
+        Componente chaqueta = componentesEnAlmacen.stream().filter(c -> c.getId() == chaquetaId && c instanceof Chaqueta).findFirst().orElse(null);
+
+        if (chaqueta == null) {
+            System.out.println("Chaqueta no encontrada.");
+            return;
+        }
+
+        System.out.println("Faldas disponibles:");
+        componentesEnAlmacen.stream().filter(c -> c instanceof Falda).forEach(System.out::println);
+        System.out.print("Ingrese ID de la falda: ");
+        int faldaId = in.nextInt();
+        Componente falda = componentesEnAlmacen.stream().filter(c -> c.getId() == faldaId && c instanceof Falda).findFirst().orElse(null);
+
+        if (falda == null) {
+            System.out.println("Falda no encontrada.");
+            return;
+        }
+
+        System.out.println("Pantalones disponibles:");
+        componentesEnAlmacen.stream().filter(c -> c instanceof Pantalon).forEach(System.out::println);
+        System.out.print("Ingrese ID del pantalón: ");
+        int pantalonId = in.nextInt();
+        Componente pantalon = componentesEnAlmacen.stream().filter(c -> c.getId() == pantalonId && c instanceof Pantalon).findFirst().orElse(null);
+
+        if (pantalon == null) {
+            System.out.println("Pantalón no encontrado.");
+            return;
+        }
+
+        System.out.print("Ingrese el nombre del traje: ");
+        in.nextLine(); // Consumir newline
+        String nombreTraje = in.nextLine();
+
+        Traje nuevoTraje = new Traje(nombreTraje, blusa, chaqueta, falda, pantalon);
+
+        if (trajesEnAlmacen.contains(nuevoTraje)) {
+            System.out.println("Ya existe un traje con ese nombre.");
+        } else {
+            trajesEnAlmacen.add(nuevoTraje);
+            System.out.println("Traje añadido con éxito.");
+        }
+    
 
     }
 

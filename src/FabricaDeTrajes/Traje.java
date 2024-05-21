@@ -10,11 +10,17 @@ public class Traje {
 
     private ArrayList<Componente> piezas;
     private String nombre;
+    private String nombreTraje;
 
     public Traje(ArrayList<Componente> piezas, String nombre) {
         this.piezas = piezas;
         this.nombre = nombre;
     }
+
+    Traje(String nombreTraje, Componente blusa, Componente chaqueta, Componente falda, Componente pantalon) {
+        this.nombreTraje = nombreTraje;
+        
+            }
 
     
     public ArrayList<Componente> getPiezas() {
