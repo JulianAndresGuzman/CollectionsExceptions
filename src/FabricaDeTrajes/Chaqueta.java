@@ -22,7 +22,7 @@ public class Chaqueta extends Componente{
     
     @Override
     public String toString(){
-        return "****Chaqueta****" + "Numero de botones : " +numBotones + " id =" + id + nombre;
+        return "****Chaqueta****  " + "Numero de botones : " +numBotones + " id =" + id + " Nombre = " + nombre;
         
     }
 }

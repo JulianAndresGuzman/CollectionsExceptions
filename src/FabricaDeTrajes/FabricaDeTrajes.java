@@ -34,11 +34,6 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
     }
 
-    public void agregarComponente(Componente componente) {
-        componentes.add(componente);
-        componentesEnAlmacen.add(componente);
-    }
-
     @Override
     public void añadirComponenteAlmacen() throws IdException, MuchoExtracomunitarioException, MangaException {
         Scanner in = new Scanner(System.in);
@@ -69,28 +64,28 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
                 System.out.println("Es con manga Larga? (false/true)");
                 boolean mangaLarga = in.nextBoolean();
                 Blusa blusa = new Blusa(id, nombre, talla, color, escomunitario, precio, mangaLarga);
-                agregarComponente(blusa);
+                componentesEnAlmacen.add(blusa);
                 break;
 
             case 2:
                 System.out.println("Cuantos numeros de botones tiene?");
                 int numbotones = in.nextInt();
                 Chaqueta chaqueta = new Chaqueta(id, nombre, talla, color, escomunitario, precio, numbotones);
-                agregarComponente(chaqueta);
+                componentesEnAlmacen.add(chaqueta);
                 break;
 
             case 3:
                 System.out.println("Tiene cremallera (false/true)");
                 boolean cremallera = in.nextBoolean();
                 Falda falda = new Falda(id, nombre, talla, color, escomunitario, precio, cremallera);
-                agregarComponente(falda);
+                componentesEnAlmacen.add(falda);
                 break;
 
             case 4:
                 System.out.println("Tiene cremallera (false/true)");
                 boolean cremallera2 = in.nextBoolean();
                 Pantalon pantalon = new Pantalon(id, nombre, talla, color, escomunitario, precio, cremallera2);
-                agregarComponente(pantalon);
+                componentesEnAlmacen.add(pantalon);
 
                 break;
             default:
