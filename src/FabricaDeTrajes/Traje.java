@@ -6,17 +6,24 @@ package FabricaDeTrajes;
  */
 import java.util.ArrayList;
 
-public class Traje {
+public class Traje implements Comparable{
+
+  
 
     private ArrayList<Componente> piezas;
     private String nombre;
 
-    public Traje(ArrayList<Componente> piezas, String nombre) {
-        this.piezas = piezas;
+    public Traje(String nombre, Blusa blusa, Chaqueta chaqueta) {
         this.nombre = nombre;
+        this.piezas = new ArrayList<>();
+        this.piezas.add(blusa);
+        this.piezas.add(chaqueta);
     }
 
-    
+    Traje(String nombreTraje, Blusa blusa, Chaqueta chaqueta, Falda falda, Pantalon pantalon) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public ArrayList<Componente> getPiezas() {
         return piezas;
     }
@@ -31,11 +38,28 @@ public class Traje {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+        
+    }
+    
+    public int compareTo(Traje otroTraje) {
+        // Aquí defines la lógica de comparación
+        // Por ejemplo, puedes comparar los nombres de los trajes
+        return this.nombre.compareTo(otroTraje.nombre);
     }
 
     @Override
     public String toString() {
-        return "piezas: " + piezas + "nombre: " + nombre;
+        StringBuilder builder = new StringBuilder();
+        builder.append("Traje: ").append(nombre).append("\n");
+        for (Componente componente : piezas) {
+            builder.append(" - ").append(componente).append("\n");
+        }
+        return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
