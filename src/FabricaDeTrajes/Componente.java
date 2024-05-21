@@ -5,7 +5,7 @@ package FabricaDeTrajes;
  */
 public class Componente {
 //Colocamos los atributos en protected
-    protected int id;
+     int id;
     protected String nombre;
     protected String talla;
     protected String color;
