@@ -8,6 +8,7 @@ public class Blusa extends Componente {
     public Blusa(int id, String nombre, String talla, String color, boolean escomunitario, double precio, boolean mangaLarga) {
         super(id, nombre, talla, color, escomunitario, precio);
         this.mangaLarga = mangaLarga;
+        
     }
 
     public boolean isMangaLarga() {
@@ -20,7 +21,7 @@ public class Blusa extends Componente {
 
     @Override
     public String toString() {
-        return "Blusa{" + "mangaLarga=" + mangaLarga + ", " + super.toString() + '}';
+        return "****Blusa****  " + "  mangaLarga=" + mangaLarga + " id: " + id;
     }
 
 }

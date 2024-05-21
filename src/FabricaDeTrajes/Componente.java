@@ -5,12 +5,12 @@ package FabricaDeTrajes;
  */
 public class Componente {
 
-    private int id;
-    private String nombre;
-    private String talla;
-    private String color;
-    private boolean escomunitario;
-    private double precio;
+    int id;
+    String nombre;
+     String talla;
+     String color;
+     boolean escomunitario;
+     double precio;
 
     public Componente(int id, String nombre, String talla, String color, boolean escomunitario, double precio) {
         this.id = id;
