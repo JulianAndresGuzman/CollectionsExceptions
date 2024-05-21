@@ -21,7 +21,7 @@ public class Blusa extends Componente {
 
     @Override
     public String toString() {
-        return "****Blusa****  " + "  mangaLarga=" + mangaLarga + " id: " + id;
+        return "*Blusa*  " + "  mangaLarga=" + mangaLarga + " id: " + id;
     }
 
 }

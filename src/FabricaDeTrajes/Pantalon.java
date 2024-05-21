@@ -23,7 +23,7 @@ public class Pantalon extends Componente {
 
     @Override
     public String toString() {
-        return "Pantalon{" + "conCremallera=" + conCremallera + '}';
+        return "Pantalon" + "conCremallera=" + conCremallera +"id" + id;
     }
     
 }
