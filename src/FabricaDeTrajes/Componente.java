@@ -4,13 +4,13 @@ package FabricaDeTrajes;
  * @author JulianAndresGuzmanCuellar 20232215518
  */
 public class Componente {
-
-    int id;
-    String nombre;
-     String talla;
-     String color;
-     boolean escomunitario;
-     double precio;
+//Colocamos los atributos en protected
+    protected int id;
+    protected String nombre;
+    protected String talla;
+    protected String color;
+    protected boolean escomunitario;
+    protected  double precio;
 
     public Componente(int id, String nombre, String talla, String color, boolean escomunitario, double precio) {
         this.id = id;

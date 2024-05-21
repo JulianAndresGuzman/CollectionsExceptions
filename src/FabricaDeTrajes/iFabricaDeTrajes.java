@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 
     public interface iFabricaDeTrajes {
-
   
 
     void añadirComponenteAlmacen() throws IdException, MuchoExtracomunitarioException, MangaException;
