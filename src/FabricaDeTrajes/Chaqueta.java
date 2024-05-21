@@ -6,7 +6,7 @@ package FabricaDeTrajes;
 public class Chaqueta extends Componente{
         private int numBotones;
 
-        public Chaqueta(int id, String nombre, String talla, String color, boolean escomunitario, double precio) {
+        public Chaqueta(int id, String nombre, String talla, String color, boolean escomunitario, double precio, int numBotones) {
         super(id, nombre, talla, color, escomunitario, precio);
         setPrecio(precio + 2 * numBotones); // Ajuste de precio según el número de botones
 

@@ -21,6 +21,7 @@ public class Componente {
         this.precio = precio;
     }
 
+
     public int getId() {
         return id;
     }

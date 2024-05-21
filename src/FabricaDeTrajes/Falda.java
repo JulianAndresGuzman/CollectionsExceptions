@@ -7,10 +7,11 @@ public class Falda extends Componente {
 
     private boolean conCremallera;
 
-    public Falda(int id, String nombre, String talla, String color, boolean escomunitario, double precio) {
+    public Falda(int id, String nombre, String talla, String color, boolean escomunitario, double precio, boolean ConCremallera) {
         super(id, nombre, talla, color, escomunitario, precio);
     }
 
+    
     public boolean isConCremallera() {
         return conCremallera;
     }
@@ -18,6 +19,7 @@ public class Falda extends Componente {
     public void setConCremallera(boolean conCremallera) {
         this.conCremallera = conCremallera;
     }
+
 
     @Override
     public String toString() {

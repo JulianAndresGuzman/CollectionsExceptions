@@ -9,6 +9,8 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
     private ArrayList<Componente> componentesEnAlmacen;
     private TreeSet<Traje> trajesEnAlmacen;
+    private List<Componente> componentes = new ArrayList<>();
+
     private boolean sonRebajas;
 
     public FabricaDeTrajes() {
@@ -32,57 +34,70 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
     }
 
+    public void agregarComponente(Componente componente) {
+        componentes.add(componente);
+        componentesEnAlmacen.add(componente);
+    }
+
     @Override
-    public void añadirComponenteAlmacen() {
+    public void añadirComponenteAlmacen() throws IdException, MuchoExtracomunitarioException, MangaException {
         Scanner in = new Scanner(System.in);
-        System.out.print("Ingrese ID del componente: ");
+        System.out.println("Ingrese ID:");
         int id = in.nextInt();
-        in.nextLine(); // Consumir newline
-        for (Componente comp : componentesEnAlmacen) {
-            if (comp.getId() == id) {
-                System.out.println("El ID del componente ya existe.");
-                return;
-            }
-        }
-
-        System.out.print("Ingrese nombre del componente: ");
+        in.nextLine(); // consume newline
+        System.out.println("Ingrese nombre:");
         String nombre = in.nextLine();
-
-        System.out.print("Ingrese talla del componente: ");
+        System.out.println("Ingrese talla:");
         String talla = in.nextLine();
-
-        System.out.print("Ingrese color del componente: ");
+        System.out.println("Ingrese color:");
         String color = in.nextLine();
-
-        System.out.print("Es comunitario (true/false): ");
+        System.out.println("Es comunitario? (true/false):");
         boolean escomunitario = in.nextBoolean();
-
-        System.out.print("Ingrese precio del componente: ");
+        System.out.println("Ingrese precio:");
         double precio = in.nextDouble();
 
-        Componente nuevoComponente = new Componente(id, nombre, talla, color, escomunitario, precio);
+        int opcion;
+        System.out.println("Que tipo de componente es?");
+        System.out.println("1.- Blusa");
+        System.out.println("2.- Chaqueta");
+        System.out.println("3.- Falda");
+        System.out.println("4.- Pantalon");
+        opcion = in.nextInt();
 
-        if (escomunitario) {
-            long countExtracomunitarios = componentesEnAlmacen.stream().filter(Componente::isEscomunitario).count();
-            if (countExtracomunitarios > componentesEnAlmacen.size() / 2) {
-                System.out.println("No se puede añadir más del 50% de componentes extracomunitarios.");
-                return;
-            }
+        switch (opcion) {
+            case 1:
+                System.out.println("Es con manga Larga? (false/true)");
+                boolean mangaLarga = in.nextBoolean();
+                Blusa blusa = new Blusa(id, nombre, talla, color, escomunitario, precio, mangaLarga);
+                agregarComponente(blusa);
+                break;
+
+            case 2:
+                System.out.println("Cuantos numeros de botones tiene?");
+                int numbotones = in.nextInt();
+                Chaqueta chaqueta = new Chaqueta(id, nombre, talla, color, escomunitario, precio, numbotones);
+                agregarComponente(chaqueta);
+                break;
+
+            case 3:
+                System.out.println("Tiene cremallera (false/true)");
+                boolean cremallera = in.nextBoolean();
+                Falda falda = new Falda(id, nombre, talla, color, escomunitario, precio, cremallera);
+                agregarComponente(falda);
+                break;
+
+            case 4:
+                System.out.println("Tiene cremallera (false/true)");
+                boolean cremallera2 = in.nextBoolean();
+                Pantalon pantalon = new Pantalon(id, nombre, talla, color, escomunitario, precio, cremallera2);
+                agregarComponente(pantalon);
+
+                break;
+            default:
+                System.out.println("Ingresa una opción válida");
+                break;
         }
-        // Verificar condiciones especiales para Blusa y Chaqueta
-        if (nuevoComponente instanceof Blusa) {
-            Blusa blusa = (Blusa) nuevoComponente;
-            boolean existeMangaCorta = componentesEnAlmacen.stream().anyMatch(c -> c instanceof Blusa && !((Blusa) c).isMangaLarga() && c.getColor().equals(blusa.getColor()));
-            boolean existeMangaLarga = componentesEnAlmacen.stream().anyMatch(c -> c instanceof Blusa && ((Blusa) c).isMangaLarga() && c.getColor().equals(blusa.getColor()));
-
-            if (blusa.isMangaLarga() && !existeMangaCorta || !blusa.isMangaLarga() && !existeMangaLarga) {
-                System.out.println("No se puede añadir la blusa. Debe existir una blusa de manga corta o larga del mismo color.");
-                return;
-            }
-        }
-
-        componentesEnAlmacen.add(nuevoComponente);
-        System.out.println("Componente añadido con éxito.");
+        System.out.println("Componente añadido con exito");
     }
 
     public void ListarComponentes() {
@@ -95,29 +110,6 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
     public void añadirTrajeAlmacen() {
 
         Scanner in = new Scanner(System.in);
-        int option;
-        System.out.println("CREA EL TIPO DE TRAJE QUE DESEAS");
-        System.out.println("1.- Blusa");
-        System.out.println("2.- Chaqueta");
-        System.out.println("3.- Falda");
-        System.out.println("4.- Pantalón");
-        option = in.nextInt();
-
-        switch (option) {
-            case 1:
-                break;
-
-            case 2:
-                break;
-
-            case 3:
-                break;
-
-            case 4:
-                break;
-
-        }
-        /*Scanner in = new Scanner(System.in);
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Blusas disponibles:");
@@ -153,12 +145,13 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
                 System.out.println("Ya existe un traje con ese nombre.");
                 return;
             }
-        }*/
+        }
         System.out.println("Traje añadido con éxito.");
 
     }
 
     public void ListarTrajes() {
+
         for (Traje traje : trajesEnAlmacen) {
             System.out.println(traje);
         }

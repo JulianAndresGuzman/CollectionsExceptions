@@ -9,7 +9,7 @@ public class Pantalon extends Componente {
    
     private boolean conCremallera;
 
-    public Pantalon(int id, String nombre, String talla, String color, boolean escomunitario, double precio) {
+    public Pantalon(int id, String nombre, String talla, String color, boolean escomunitario, double precio, boolean conCremallera) {
         super(id, nombre, talla, color, escomunitario, precio);
     }
 
