@@ -23,15 +23,15 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
     void EscribirMenu() {
 
         System.out.println("***************************************");
-        System.out.println("MENU FABRICA DE TRAJES");
-        System.out.println("1.- Añadir Componente a almacén");
-        System.out.println("2.- Listar Componentes del almacén");
-        System.out.println("3.- Crear traje y añadir a almacén");
-        System.out.println("4.- Listar trajes del almacén");
-        System.out.println("5.- Activar/Desactivar las rebajas");
-        System.out.println("6.- Crear envío");
-        System.out.println("0.- Salir");
-        System.out.println("****************************************");
+        System.out.println("* MENU FABRICA DE TRAJES              *"); 
+        System.out.println("* 1.- Agregar Componente a almacen    *");
+        System.out.println("* 2.- Listar Componentes del almacen  *");
+        System.out.println("* 3.- Crear traje y agregar a almacen *");
+        System.out.println("* 4.- Listar trajes del almacen       *");
+        System.out.println("* 5.- Activar/Desactivar las rebajas  *");
+        System.out.println("* 6.- Crear envio                     *");
+        System.out.println("* 0.- Salir                           *");
+        System.out.println("***************************************");
 
     }
 
@@ -105,45 +105,6 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
     @Override
     public void añadirTrajeAlmacen() {
-
-        Scanner in = new Scanner(System.in);
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Blusas disponibles:");
-        componentesEnAlmacen.stream().filter(c -> c instanceof Blusa).forEach(System.out::println);
-
-        System.out.print("Ingrese ID de la blusa: ");
-        int blusaId = scanner.nextInt();
-        Componente blusa = componentesEnAlmacen.stream().filter(c -> c.getId() == blusaId && c instanceof Blusa).findFirst().orElse(null);
-
-        if (blusa == null) {
-            System.out.println("Blusa no encontrada.");
-            return;
-        }
-
-        System.out.println("Chaquetas disponibles:");
-        componentesEnAlmacen.stream().filter(c -> c instanceof Chaqueta).forEach(System.out::println);
-
-        System.out.print("Ingrese ID de la chaqueta: ");
-        int chaquetaId = scanner.nextInt();
-        Componente chaqueta = componentesEnAlmacen.stream().filter(c -> c.getId() == chaquetaId && c instanceof Chaqueta).findFirst().orElse(null);
-
-        if (chaqueta == null) {
-            System.out.println("Chaqueta no encontrada.");
-            return;
-        }
-
-        System.out.print("Ingrese el nombre del traje: ");
-        scanner.nextLine(); // Consumir newline
-        String nombreTraje = scanner.nextLine();
-
-        for (Traje traje : trajesEnAlmacen) {
-            if (traje.getNombre().equals(nombreTraje)) {
-                System.out.println("Ya existe un traje con ese nombre.");
-                return;
-            }
-        }
-        System.out.println("Traje añadido con éxito.");
 
     }
 

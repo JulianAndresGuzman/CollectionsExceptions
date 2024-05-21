@@ -10,7 +10,7 @@ public class Main {
 
         do {
             fabrica.EscribirMenu();
-            System.out.println("Seleccione una opción:");
+            System.out.println("Seleccione una opcion:");
             opcion = scanner.nextInt();
             scanner.nextLine(); // Consumir la nueva línea
 
