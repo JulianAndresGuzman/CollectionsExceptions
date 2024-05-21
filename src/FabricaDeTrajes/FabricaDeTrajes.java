@@ -13,6 +13,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
     private boolean sonRebajas;
 
+    
     public FabricaDeTrajes() {
         this.componentesEnAlmacen = new ArrayList<>();
         this.trajesEnAlmacen = new TreeSet<>();
@@ -33,6 +34,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
         System.out.println("****************************************");
 
     }
+
 
     @Override
     public void añadirComponenteAlmacen() throws IdException, MuchoExtracomunitarioException, MangaException {

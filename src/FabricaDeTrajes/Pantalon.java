@@ -11,6 +11,7 @@ public class Pantalon extends Componente {
 
     public Pantalon(int id, String nombre, String talla, String color, boolean escomunitario, double precio, boolean conCremallera) {
         super(id, nombre, talla, color, escomunitario, precio);
+        this.conCremallera = conCremallera;
     }
 
     public boolean isConCremallera() {
@@ -23,7 +24,7 @@ public class Pantalon extends Componente {
 
     @Override
     public String toString() {
-        return "****Pantalon****  " + "Nombre: " + nombre + "Cremallera: " +conCremallera + " id =" + id;
-    }
+        return "****Pantalon****  " + "Nombre: " + nombre + "    Cremallera: " +conCremallera + "    id =" + id;
+    } 
     
 }
