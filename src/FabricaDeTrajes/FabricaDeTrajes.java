@@ -105,7 +105,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
     
 //////////////////////////////////////////////////////////////////////
     
-     @Override
+   @Override
     public void añadirTrajeAlmacen() {
         Scanner scanner = new Scanner(System.in);
 
@@ -170,8 +170,8 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
         System.out.println("Traje añadido con éxito.");
     }
 
-
-public void ListarTrajes() {
+    @Override
+    public void ListarTrajes() {
         for (Traje traje : trajesEnAlmacen) {
             System.out.println(traje);
         }
@@ -189,21 +189,45 @@ public void ListarTrajes() {
     
     
 //////////////////////////////////////////////////
-    @Override
-    public void crearEnvío() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese la información del envío:");
-        System.out.print("Destino: ");
-        String destino = scanner.nextLine();
-        System.out.print("Fecha de envío (dd/mm/aaaa): ");
-        String fechaEnvio = scanner.nextLine();
-        System.out.print("Tipo de envío (express/normal): ");
-        String tipoEnvio = scanner.nextLine();
+@Override
+public void crearEnvío() {
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Ingrese la información del envío:");
+    System.out.print("Destino: ");
+    String destino = scanner.nextLine();
+    System.out.print("Fecha de envío (dd/mm/aaaa): ");
+    String fechaEnvio = scanner.nextLine();
+    System.out.print("Tipo de envío (express/normal): ");
+    String tipoEnvio = scanner.nextLine();
 
-        System.out.println("Envio creado con éxito.");
+    System.out.println("Lista de trajes disponibles para envío:");
+    for (Traje traje : trajesEnAlmacen) {
+        System.out.println(traje);
+    }
+
+    System.out.println("Ingrese los IDs de los trajes a enviar, separados por comas:");
+    String ids = scanner.nextLine();
+    String[] idsArray = ids.split(",");
+
+    List<Traje> trajesSeleccionados = new ArrayList<>();
+    for (String id : idsArray) {
+        int trajeId = Integer.parseInt(id.trim());
+        Traje traje = trajesEnAlmacen.stream().filter(t -> t.getId() == trajeId).findFirst().orElse(null);
+        if (traje != null) {
+            trajesSeleccionados.add(traje);
+        }
+    }
+
+    // Eliminar los trajes seleccionados del almacén
+    trajesEnAlmacen.removeAll(trajesSeleccionados);
+
+    System.out.println("Envío creado con éxito. Trajes enviados:");
+    for (Traje traje : trajesSeleccionados) {
+        System.out.println(traje);
     }
 }
+    
+}
 
-
-   
+  
    

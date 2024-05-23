@@ -1,27 +1,30 @@
 package FabricaDeTrajes;
 
-/**
- *
- * @author JulianAndresGuzmanCuellar 20232215518
- */
 import java.util.ArrayList;
 
-public class Traje implements Comparable{
+public class Traje implements Comparable<Traje> {
 
-  
-
+    private static int idCounter = 1; // Counter for generating unique IDs
+    private int id; // ID único para cada traje
     private ArrayList<Componente> piezas;
     private String nombre;
 
     public Traje(String nombre, Blusa blusa, Chaqueta chaqueta) {
+        this.id = idCounter++;
         this.nombre = nombre;
         this.piezas = new ArrayList<>();
         this.piezas.add(blusa);
         this.piezas.add(chaqueta);
     }
 
-    Traje(String nombreTraje, Blusa blusa, Chaqueta chaqueta, Falda falda, Pantalon pantalon) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Traje(String nombre, Blusa blusa, Chaqueta chaqueta, Falda falda, Pantalon pantalon) {
+        this.id = idCounter++;
+        this.nombre = nombre;
+        this.piezas = new ArrayList<>();
+        this.piezas.add(blusa);
+        this.piezas.add(chaqueta);
+        if (falda != null) this.piezas.add(falda);
+        if (pantalon != null) this.piezas.add(pantalon);
     }
 
     public ArrayList<Componente> getPiezas() {
@@ -38,28 +41,24 @@ public class Traje implements Comparable{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-        
     }
     
+    public int getId() {
+        return id;
+    }
+
+    @Override
     public int compareTo(Traje otroTraje) {
-        // Aquí defines la lógica de comparación
-        // Por ejemplo, puedes comparar los nombres de los trajes
         return this.nombre.compareTo(otroTraje.nombre);
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Traje: ").append(nombre).append("\n");
+        builder.append("Traje ID: ").append(id).append(", Nombre: ").append(nombre).append("\n");
         for (Componente componente : piezas) {
             builder.append(" - ").append(componente).append("\n");
         }
         return builder.toString();
     }
-
-    @Override
-    public int compareTo(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }
