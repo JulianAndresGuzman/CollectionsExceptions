@@ -11,6 +11,9 @@ public class Traje {
     private ArrayList<Componente> piezas;
     private String nombre;
     private String nombreTraje;
+    private Componente chaqueta;
+    private Componente blusa;
+    private Componente faldaOPantalon;
 
     public Traje(ArrayList<Componente> piezas, String nombre) {
         this.piezas = piezas;
