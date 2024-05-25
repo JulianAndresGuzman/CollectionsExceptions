@@ -1,31 +1,32 @@
 package FabricaDeTrajes;
 
-/**
- *
- * @author JulianAndresGuzmanCuellar 20232215518
- */
 import java.util.ArrayList;
 
-public class Traje {
+public class Traje implements Comparable<Traje> {
 
+    private static int idCounter = 1; // Counter for generating unique IDs
+    private int id; // ID único para cada traje
     private ArrayList<Componente> piezas;
     private String nombre;
-    private String nombreTraje;
-    private Componente chaqueta;
-    private Componente blusa;
-    private Componente faldaOPantalon;
 
-    public Traje(ArrayList<Componente> piezas, String nombre) {
-        this.piezas = piezas;
+    public Traje(String nombre, Blusa blusa, Chaqueta chaqueta) {
+        this.id = idCounter++;
         this.nombre = nombre;
+        this.piezas = new ArrayList<>();
+        this.piezas.add(blusa);
+        this.piezas.add(chaqueta);
     }
 
-    Traje(String nombreTraje, Componente blusa, Componente chaqueta, Componente falda, Componente pantalon) {
-        this.nombreTraje = nombreTraje;
-        
-            }
+    public Traje(String nombre, Blusa blusa, Chaqueta chaqueta, Falda falda, Pantalon pantalon) {
+        this.id = idCounter++;
+        this.nombre = nombre;
+        this.piezas = new ArrayList<>();
+        this.piezas.add(blusa);
+        this.piezas.add(chaqueta);
+        if (falda != null) this.piezas.add(falda);
+        if (pantalon != null) this.piezas.add(pantalon);
+    }
 
-    
     public ArrayList<Componente> getPiezas() {
         return piezas;
     }
@@ -41,10 +42,23 @@ public class Traje {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public int compareTo(Traje otroTraje) {
+        return this.nombre.compareTo(otroTraje.nombre);
+    }
 
     @Override
     public String toString() {
-        return "piezas: " + piezas + "nombre: " + nombre;
+        StringBuilder builder = new StringBuilder();
+        builder.append("Traje ID: ").append(id).append(", Nombre: ").append(nombre).append("\n");
+        for (Componente componente : piezas) {
+            builder.append(" - ").append(componente).append("\n");
+        }
+        return builder.toString();
     }
-
 }
