@@ -9,7 +9,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
     private ArrayList<Componente> componentesEnAlmacen;
     private TreeSet<Traje> trajesEnAlmacen;
-    private List<Componente> componentes = new ArrayList<>();
+    
 
     private boolean sonRebajas;
 
@@ -106,7 +106,7 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 //////////////////////////////////////////////////////////////////////
     
    @Override
-    public void añadirTrajeAlmacen() {
+    public void añadirTrajeAlmacen() throws ColoresException, TallaException {
         Scanner scanner = new Scanner(System.in);
 
         // Listar y seleccionar Blusa
@@ -161,14 +161,34 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
             }
         }
 
-        System.out.print("Ingrese el nombre del traje: ");
-        scanner.nextLine(); // Consumir newline
-        String nombreTraje = scanner.nextLine();
-
-        Traje traje = new Traje(nombreTraje, blusa, chaqueta, falda, pantalon);
-        trajesEnAlmacen.add(traje);
-        System.out.println("Traje añadido con éxito.");
+         if (!sonColoresAmigos(blusa.getColor(), chaqueta.getColor()) ||
+            (falda != null && !sonColoresAmigos(blusa.getColor(), falda.getColor())) ||
+            (pantalon != null && !sonColoresAmigos(blusa.getColor(), pantalon.getColor()))) {
+        throw new ColoresException("Los colores de las prendas no son amigos.");
     }
+
+    if (!blusa.getTalla().equals(chaqueta.getTalla()) ||
+            (falda != null && !blusa.getTalla().equals(falda.getTalla())) ||
+            (pantalon != null && !blusa.getTalla().equals(pantalon.getTalla()))) {
+        throw new TallaException("Las tallas de las prendas no son iguales.");
+    }
+
+  
+    
+    
+    // Agregar traje al almacén
+    System.out.print("Ingrese el nombre del traje: ");
+        scanner.nextLine(); // Consumir newline
+    String nombreTraje = scanner.nextLine();
+    Traje traje = new Traje(nombreTraje, blusa, chaqueta, falda, pantalon);
+    trajesEnAlmacen.add(traje);
+    System.out.println("Traje añadido con éxito.");
+}
+        
+   private boolean sonColoresAmigos(String color1, String color2) {
+    return color1.charAt(0) == color2.charAt(0); // Compara si las primeras letras de los colores son iguales
+}
+    
 
     @Override
     public void ListarTrajes() {

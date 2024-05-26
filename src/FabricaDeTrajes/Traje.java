@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Traje implements Comparable<Traje> {
 
-    private static int idCounter = 1; // Counter for generating unique IDs
+    private static int idCounter = 1; // contantador estatico para generar IDs unicos para cada traje
     private int id; // ID único para cada traje
     private ArrayList<Componente> piezas;
     private String nombre;
@@ -47,6 +47,12 @@ public class Traje implements Comparable<Traje> {
         return id;
     }
 
+    
+    
+    /* Se realiza un metodo compareto compara
+    Sobrescribe el método compareTo 
+    Compara los nombres de dos trajes y devuelve un valor que indica su orden relativo.*/
+    
     @Override
     public int compareTo(Traje otroTraje) {
         return this.nombre.compareTo(otroTraje.nombre);

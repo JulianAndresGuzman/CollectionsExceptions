@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+
 // Se crea la interface IgestorDeArchivos en esta se admistra las actualizaciones o la eliminacion de los componente
 
 public interface IGestorDeArchivos<T> {
