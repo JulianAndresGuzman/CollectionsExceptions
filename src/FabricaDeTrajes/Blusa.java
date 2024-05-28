@@ -21,7 +21,7 @@ public class Blusa extends Componente {
 
     @Override
     public String toString() {
-        return "****Blusa****  " + "Nombre:" + nombre + "    Es manga larga:" + mangaLarga + "     id =" + id;
+        return "****Blusa****  " + "Nombre:" + nombre + "    Es manga larga:" + mangaLarga + "     id =" + id     +    "precio:" + precio;
     }
 
 }

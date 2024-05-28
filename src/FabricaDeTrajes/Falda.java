@@ -24,6 +24,6 @@ public class Falda extends Componente {
  
     @Override
     public String toString() {
-        return "****Falda****  "+ "Nombre = " + nombre + "     Tiene cremallera: " + conCremallera + "  id=" + id ;
+        return "****Falda****  "+ "Nombre = " + nombre + "     Tiene cremallera: " + conCremallera + "  id=" + id    +   "precio:" + precio ;
     }
 }

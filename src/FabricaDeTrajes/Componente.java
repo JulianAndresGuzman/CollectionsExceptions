@@ -94,7 +94,7 @@ public void actualizar(Componente nuevoComponente) {
     public String toString() {
         return " Nombre:" + nombre + "         id:" + id + "        talla:" + 
                 talla + "           color:" + color + "         es comunitario:" + 
-                escomunitario + "        precio:" + precio;
+                escomunitario + "         precio:" +  precio;
     }
 
     @Override

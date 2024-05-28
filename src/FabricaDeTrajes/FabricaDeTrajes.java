@@ -10,14 +10,14 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
     private ArrayList<Componente> componentesEnAlmacen;
     private TreeSet<Traje> trajesEnAlmacen;
     
-
     private boolean sonRebajas;
-
+    private double descuento;
     
     public FabricaDeTrajes() {
         this.componentesEnAlmacen = new ArrayList<>();
         this.trajesEnAlmacen = new TreeSet<>();
         this.sonRebajas = false;
+        this.descuento = 0.0; 
     }
 // Se actualizo el metodo del menu
     void EscribirMenu() {
@@ -198,15 +198,37 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
     }
 
     @Override
-    public void activarDesactivarRebajas() {
-        sonRebajas = !sonRebajas; // Cambia el estado de las rebajas
-        if (sonRebajas) {
-            System.out.println("Rebajas activadas.");
+    public void activarDesactivarRebajas() { 
+        Scanner scanner = new Scanner(System.in);
+        if (!sonRebajas) {
+            System.out.print("Ingrese el porcentaje de descuento (por ejemplo, 20 para 20%): ");
+            descuento = scanner.nextDouble() / 100.0; // Convertir porcentaje a decimal
+            aplicarDescuento();
+            System.out.println("Rebajas activadas. Los precios han sido actualizados.");
         } else {
-            System.out.println("Rebajas desactivadas.");
+            quitarDescuento();
+            System.out.println("Rebajas desactivadas. Los precios han sido restaurados.");
+        }
+        sonRebajas = !sonRebajas; // Cambia el estado de las rebajas
+    }
+
+    private void aplicarDescuento() {
+        for (Componente componente : componentesEnAlmacen) {
+            componente.setPrecio(componente.getPrecio() * (1 - descuento));
+        }
+        for (Traje traje : trajesEnAlmacen) {
+            traje.setPrecio((int) (traje.getPrecio() * (1 - descuento)));
         }
     }
-    
+
+    private void quitarDescuento() {
+        for (Componente componente : componentesEnAlmacen) {
+            componente.setPrecio(componente.getPrecio() / (1 - descuento));
+        }
+        for (Traje traje : trajesEnAlmacen) {
+            traje.setPrecio((int) (traje.getPrecio() / (1 - descuento)));
+        }
+    }
     
     // En esta parte de añadio los nuevos metodos para que funcione 
     
