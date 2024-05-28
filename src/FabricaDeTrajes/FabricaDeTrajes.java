@@ -9,37 +9,39 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
 
     private ArrayList<Componente> componentesEnAlmacen;
     private TreeSet<Traje> trajesEnAlmacen;
-
+    
     private boolean sonRebajas;
-
+    private double descuento;
+    
     public FabricaDeTrajes() {
         this.componentesEnAlmacen = new ArrayList<>();
         this.trajesEnAlmacen = new TreeSet<>();
         this.sonRebajas = false;
+        this.descuento = 0.0; 
     }
-    
-
+// Se actualizo el metodo del menu
     void EscribirMenu() {
-        System.out.println("***************************************");
-        System.out.println("MENU FABRICA DE TRAJES");
-        System.out.println("1.- Añadir Componente a almacén");
-        System.out.println("2.- Listar Componentes del almacén");
-        System.out.println("3.- Actualizar Componente en el almacén");
-        System.out.println("4.- Eliminar Componente del almacén");
-        System.out.println("5.- Crear traje y añadir a almacén");
-        System.out.println("6.- Listar trajes del almacén");
-        System.out.println("7.- Activar/Desactivar las rebajas");
-        System.out.println("8.- Crear envío");
-        System.out.println("0.- Salir");
-        System.out.println("****************************************");
-    }
+    System.out.println("***************************************");
+    System.out.println("MENU FABRICA DE TRAJES");
+    System.out.println("1.- Añadir Componente a almacén");
+    System.out.println("2.- Listar Componentes del almacén");
+    System.out.println("3.- Actualizar Componente en el almacén");
+    System.out.println("4.- Eliminar Componente del almacén");
+    System.out.println("5.- Crear traje y añadir a almacén");
+    System.out.println("6.- Listar trajes del almacén");
+    System.out.println("7.- Activar/Desactivar las rebajas");
+    System.out.println("8.- Crear envío");
+    System.out.println("0.- Salir");
+    System.out.println("****************************************");
+}
+
 
     @Override
     public void añadirComponenteAlmacen() throws IdException, MuchoExtracomunitarioException, MangaException {
         Scanner in = new Scanner(System.in);
         System.out.println("Ingrese ID:");
         int id = in.nextInt();
-        in.nextLine();
+        in.nextLine(); // consume newline
         System.out.println("Ingrese nombre:");
         String nombre = in.nextLine();
         System.out.println("Ingrese talla:");
@@ -95,15 +97,16 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
         System.out.println("Componente añadido con exito");
     }
 
-    @Override
     public void ListarComponentes() {
         for (Componente componente : componentesEnAlmacen) {
             System.out.println(componente);
         }
     }
-
-    @Override
-    public void añadirTrajeAlmacen() {
+    
+//////////////////////////////////////////////////////////////////////
+    
+   @Override
+    public void añadirTrajeAlmacen() throws ColoresException, TallaException {
         Scanner scanner = new Scanner(System.in);
 
         // Listar y seleccionar Blusa
@@ -158,14 +161,34 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
             }
         }
 
-        System.out.print("Ingrese el nombre del traje: ");
-        scanner.nextLine(); // Consumir newline
-        String nombreTraje = scanner.nextLine();
-
-        Traje traje = new Traje(nombreTraje, blusa, chaqueta, falda, pantalon);
-        trajesEnAlmacen.add(traje);
-        System.out.println("Traje añadido con éxito.");
+         if (!sonColoresAmigos(blusa.getColor(), chaqueta.getColor()) ||
+            (falda != null && !sonColoresAmigos(blusa.getColor(), falda.getColor())) ||
+            (pantalon != null && !sonColoresAmigos(blusa.getColor(), pantalon.getColor()))) {
+        throw new ColoresException("Los colores de las prendas no son amigos.");
     }
+
+    if (!blusa.getTalla().equals(chaqueta.getTalla()) ||
+            (falda != null && !blusa.getTalla().equals(falda.getTalla())) ||
+            (pantalon != null && !blusa.getTalla().equals(pantalon.getTalla()))) {
+        throw new TallaException("Las tallas de las prendas no son iguales.");
+    }
+
+  
+    
+    
+    // Agregar traje al almacén
+    System.out.print("Ingrese el nombre del traje: ");
+        scanner.nextLine(); // Consumir newline
+    String nombreTraje = scanner.nextLine();
+    Traje traje = new Traje(nombreTraje, blusa, chaqueta, falda, pantalon);
+    trajesEnAlmacen.add(traje);
+    System.out.println("Traje añadido con éxito.");
+}
+        
+   private boolean sonColoresAmigos(String color1, String color2) {
+    return color1.charAt(0) == color2.charAt(0); // Compara si las primeras letras de los colores son iguales
+}
+    
 
     @Override
     public void ListarTrajes() {
@@ -175,112 +198,138 @@ class FabricaDeTrajes implements iFabricaDeTrajes {
     }
 
     @Override
-    public void activarDesactivarRebajas() {
-        sonRebajas = !sonRebajas; // Cambia el estado de las rebajas
-        if (sonRebajas) {
-            System.out.println("Rebajas activadas.");
+    public void activarDesactivarRebajas() { 
+        Scanner scanner = new Scanner(System.in);
+        if (!sonRebajas) {
+            System.out.print("Ingrese el porcentaje de descuento (por ejemplo, 20 para 20%): ");
+            descuento = scanner.nextDouble() / 100.0; // Convertir porcentaje a decimal
+            aplicarDescuento();
+            System.out.println("Rebajas activadas. Los precios han sido actualizados.");
         } else {
-            System.out.println("Rebajas desactivadas.");
+            quitarDescuento();
+            System.out.println("Rebajas desactivadas. Los precios han sido restaurados.");
         }
+        sonRebajas = !sonRebajas; // Cambia el estado de las rebajas
     }
 
-    // En esta parte de añadio los nuevos metodos para que funcione 
-    public void actualizarComponenteEnAlmacen() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID del componente a actualizar: ");
-        int idComponente = scanner.nextInt();
-
-        // Buscar el componente en la lista
+    private void aplicarDescuento() {
         for (Componente componente : componentesEnAlmacen) {
-            if (componente.getId() == idComponente) {
-                System.out.println("Ingrese los nuevos datos del componente:");
-                System.out.print("Nombre: ");
-                String nombre = scanner.next();
-                System.out.print("Talla: ");
-                String talla = scanner.next();
-                System.out.print("Color: ");
-                String color = scanner.next();
-                System.out.print("Es comunitario? (true/false): ");
-                boolean escomunitario = scanner.nextBoolean();
-                System.out.print("Precio: ");
-                double precio = scanner.nextDouble();
-
-                // Crear un nuevo componente con los nuevos datos
-                Componente nuevoComponente = new Componente(idComponente, nombre, talla, color, escomunitario, precio);
-
-                // Actualizar el componente en la lista
-                componente.actualizar(nuevoComponente);
-
-                System.out.println("Componente actualizado correctamente.");
-                return; // Salir del método una vez que se ha actualizado el componente
-            }
+            componente.setPrecio(componente.getPrecio() * (1 - descuento));
         }
-
-        // Si llegamos aquí, significa que no se encontró el componente con el ID proporcionado
-        System.out.println("No se encontró un componente con el ID especificado.");
-
-    }
-
-    public void eliminarComponenteDelAlmacen() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID del componente a eliminar: ");
-        int idComponente = scanner.nextInt();
-
-        // Utilizamos un iterador para recorrer la lista y eliminar el componente
-        Iterator<Componente> iterator = componentesEnAlmacen.iterator();
-        while (iterator.hasNext()) {
-            Componente componente = iterator.next();
-            if (componente.getId() == idComponente) {
-                iterator.remove();
-                System.out.println("Componente eliminado del almacén.");
-                return; // Salimos del método una vez que se ha eliminado el componente
-            }
-        }
-
-        // Si llegamos aquí, significa que no se encontró el componente con el ID proporcionado
-        System.out.println("No se encontró un componente con el ID especificado.");
-    }
-
-//////////////////////////////////////////////////
-    public void crearEnvío() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese la información del envío:");
-        System.out.print("Destino: ");
-        String destino = scanner.nextLine();
-        System.out.print("Fecha de envío (dd/mm/aaaa): ");
-        String fechaEnvio = scanner.nextLine();
-        System.out.print("Tipo de envío (express/normal): ");
-        String tipoEnvio = scanner.nextLine();
-
-        System.out.println("Lista de trajes disponibles para envío:");
         for (Traje traje : trajesEnAlmacen) {
-            System.out.println(traje);
+            traje.setPrecio((int) (traje.getPrecio() * (1 - descuento)));
         }
-
-        System.out.println("Ingrese los IDs de los trajes a enviar, separados por comas:");
-        String ids = scanner.nextLine();
-        String[] idsArray = ids.split(",");
-
-        List<Traje> trajesSeleccionados = new ArrayList<>();
-        for (String id : idsArray) {
-            int trajeId = Integer.parseInt(id.trim());
-            Traje traje = trajesEnAlmacen.stream().filter(t -> t.getId() == trajeId).findFirst().orElse(null);
-            if (traje != null) {
-                trajesSeleccionados.add(traje);
-            }
-        }
-
-        // Eliminar los trajes seleccionados del almacén
-        trajesEnAlmacen.removeAll(trajesSeleccionados);
-
-        System.out.println("Envío creado con éxito. Trajes enviados:");
-        for (Traje traje : trajesSeleccionados) {
-            System.out.println(traje);
-            {
-
-            }
-        }
-
     }
+
+    private void quitarDescuento() {
+        for (Componente componente : componentesEnAlmacen) {
+            componente.setPrecio(componente.getPrecio() / (1 - descuento));
+        }
+        for (Traje traje : trajesEnAlmacen) {
+            traje.setPrecio((int) (traje.getPrecio() / (1 - descuento)));
+        }
+    }
+    
+    // En esta parte de añadio los nuevos metodos para que funcione 
+    
+    public void actualizarComponenteEnAlmacen() {
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Ingrese el ID del componente a actualizar: ");
+    int idComponente = scanner.nextInt();
+
+    // Buscar el componente en la lista
+    for (Componente componente : componentesEnAlmacen) {
+        if (componente.getId() == idComponente) {
+            System.out.println("Ingrese los nuevos datos del componente:");
+            System.out.print("Nombre: ");
+            String nombre = scanner.next();
+            System.out.print("Talla: ");
+            String talla = scanner.next();
+            System.out.print("Color: ");
+            String color = scanner.next();
+            System.out.print("Es comunitario? (true/false): ");
+            boolean escomunitario = scanner.nextBoolean();
+            System.out.print("Precio: ");
+            double precio = scanner.nextDouble();
+
+            // Crear un nuevo componente con los nuevos datos
+            Componente nuevoComponente = new Componente(idComponente, nombre, talla, color, escomunitario, precio);
+
+            // Actualizar el componente en la lista
+            componente.actualizar(nuevoComponente);
+
+            System.out.println("Componente actualizado correctamente.");
+            return; // Salir del método una vez que se ha actualizado el componente
+        }
+    }
+
+    // Si llegamos aquí, significa que no se encontró el componente con el ID proporcionado
+    System.out.println("No se encontró un componente con el ID especificado.");
 
 }
+    public void eliminarComponenteDelAlmacen() {
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Ingrese el ID del componente a eliminar: ");
+    int idComponente = scanner.nextInt();
+
+    // Utilizamos un iterador para recorrer la lista y eliminar el componente
+    Iterator<Componente> iterator = componentesEnAlmacen.iterator();
+    while (iterator.hasNext()) {
+        Componente componente = iterator.next();
+        if (componente.getId() == idComponente) {
+            iterator.remove();
+            System.out.println("Componente eliminado del almacén.");
+            return; // Salimos del método una vez que se ha eliminado el componente
+        }
+    }
+
+    // Si llegamos aquí, significa que no se encontró el componente con el ID proporcionado
+    System.out.println("No se encontró un componente con el ID especificado.");
+}
+
+
+    
+//////////////////////////////////////////////////
+
+public void crearEnvío() {
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Ingrese la información del envío:");
+    System.out.print("Destino: ");
+    String destino = scanner.nextLine();
+    System.out.print("Fecha de envío (dd/mm/aaaa): ");
+    String fechaEnvio = scanner.nextLine();
+    System.out.print("Tipo de envío (express/normal): ");
+    String tipoEnvio = scanner.nextLine();
+
+    System.out.println("Lista de trajes disponibles para envío:");
+    for (Traje traje : trajesEnAlmacen) {
+        System.out.println(traje);
+    }
+
+    System.out.println("Ingrese los IDs de los trajes a enviar, separados por comas:");
+    String ids = scanner.nextLine();
+    String[] idsArray = ids.split(",");
+
+    List<Traje> trajesSeleccionados = new ArrayList<>();
+    for (String id : idsArray) {
+        int trajeId = Integer.parseInt(id.trim());
+        Traje traje = trajesEnAlmacen.stream().filter(t -> t.getId() == trajeId).findFirst().orElse(null);
+        if (traje != null) {
+            trajesSeleccionados.add(traje);
+        }
+    }
+
+    // Eliminar los trajes seleccionados del almacén
+    trajesEnAlmacen.removeAll(trajesSeleccionados);
+
+    System.out.println("Envío creado con éxito. Trajes enviados:");
+    for (Traje traje : trajesSeleccionados) {
+        System.out.println(traje);{
+        
+    }
+    }
+    
+}
+
+}
+    
